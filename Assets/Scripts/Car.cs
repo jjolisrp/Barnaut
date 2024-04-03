@@ -13,6 +13,9 @@ public class Car : MonoBehaviour
     public float frontDrag;
     public float sidesDrag;
 
+    public float handBrakeFrontDrag;
+    public float handBrakeSidesDrag;
+
     [Header("Steering")]
 
     public float maxTurnSpeed;
@@ -101,11 +104,11 @@ public class Car : MonoBehaviour
 
         // Apply front drag
 
-        if(!accelerate || !isGrounded)
+        if(isGrounded  && (!accelerate && !reverse || handBrake))
         {
             if(speedLocal.z > 0)
             {
-                speedLocal -= new Vector3(0, 0, frontDrag * Time.deltaTime);
+                speedLocal -= new Vector3(0, 0, (handBrake ? handBrakeFrontDrag : frontDrag) * Time.deltaTime);
                 if (speedLocal.z < 0) { speedLocal = new Vector3(speedLocal.x, speedLocal.y, 0); }
             }
 
@@ -113,16 +116,18 @@ public class Car : MonoBehaviour
 
         // Apply side drag
 
-        if(isGrounded && !handBrake)
+        if(isGrounded)
         {
+            float drag = (handBrake ? handBrakeSidesDrag : sidesDrag);
+
             if (speedLocal.x > 0)
             {
-                speedLocal -= new Vector3(sidesDrag * Time.deltaTime, 0, 0);
+                speedLocal -= new Vector3(drag * Time.deltaTime, 0, 0);
                 if (speedLocal.x < 0) { speedLocal = new Vector3(0, speedLocal.y, speedLocal.z); }
             }
             else if (speedLocal.x < 0)
             {
-                speedLocal += new Vector3(sidesDrag * Time.deltaTime, 0, 0);
+                speedLocal += new Vector3(drag * Time.deltaTime, 0, 0);
                 if (speedLocal.x > 0) { speedLocal = new Vector3(0, speedLocal.y, speedLocal.z); }
             }
         }

@@ -50,11 +50,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 240
-  maxTurnSpeed: 60
   acceleration: 20
-  turnAcceleration: 60
   frontDrag: 10
   sidesDrag: 50
+  handBrakeFrontDrag: 50
+  handBrakeSidesDrag: 20
+  maxTurnSpeed: 60
+  turnAcceleration: 60
   turnDrag: 25
   groundCheckOrigin: {fileID: 8544913873640018162}
   groundCheckDistance: 1

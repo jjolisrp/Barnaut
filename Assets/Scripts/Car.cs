@@ -29,7 +29,8 @@ public class Car : MonoBehaviour
 
     [Header("Debug")]
 
-    public Transform debugText;
+    public Transform debugText1;
+    public Transform debugText2;
 
     float speed;
     float turnSpeed;
@@ -41,6 +42,7 @@ public class Car : MonoBehaviour
     bool isGrounded;
 
     TextMesh speedTextC;
+    TextMesh timeTextC;
 
     // Control flags
 
@@ -50,13 +52,17 @@ public class Car : MonoBehaviour
     bool turnRight;
     bool handBrake;
 
+    float debugTimer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        speedTextC = debugText.GetComponent<TextMesh>();
+        speedTextC = debugText1.GetComponent<TextMesh>();
+        timeTextC = debugText2.GetComponent<TextMesh>();
+
+        debugTimer = 0;
     }
 
     // Update is called once per frame
@@ -70,8 +76,9 @@ public class Car : MonoBehaviour
 
         handBrake = Input.GetKey(KeyCode.Space);
 
+        debugTimer += Time.deltaTime;
         speedTextC.text = String.Format("{0:000}", rigidbody.velocity.magnitude);
-
+        timeTextC.text = String.Format("{0:0}:{1:00}", (int)(debugTimer / 60), (int)(debugTimer) % 60);
         
     }
 

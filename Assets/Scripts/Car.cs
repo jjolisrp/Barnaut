@@ -27,6 +27,20 @@ public class Car : MonoBehaviour
     public Transform groundCheckOrigin;
     public float groundCheckDistance = 1;
 
+    [Header("Sounds")]
+
+    public float windVolumeMin;
+    public float windVolumeMax;
+    public float windPitchMin;
+    public float windPitchMax;
+    public Transform windSound;
+
+    public float engineVolumeMin;
+    public float engineVolumeMax;
+    public float enginePitchMin;
+    public float enginePitchMax;
+    public Transform engineSound;
+
     [Header("Debug")]
 
     public Transform debugText1;
@@ -52,6 +66,11 @@ public class Car : MonoBehaviour
     bool turnRight;
     bool handBrake;
 
+    // Sound
+
+    AudioSource engineSoundC;
+    AudioSource windSoundC;
+
     float debugTimer;
 
 
@@ -61,6 +80,8 @@ public class Car : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         speedTextC = debugText1.GetComponent<TextMesh>();
         timeTextC = debugText2.GetComponent<TextMesh>();
+        engineSoundC = engineSound.GetComponent<AudioSource>();
+        windSoundC = windSound.GetComponent<AudioSource>();
 
         debugTimer = 0;
     }
@@ -184,6 +205,15 @@ public class Car : MonoBehaviour
 
         rigidbody.velocity = speed;
         rigidbody.angularVelocity = angularSpeed;
+
+        // Update sounds
+
+
+        float lerpFactor = speed.magnitude / maxSpeed;
+        engineSoundC.pitch = enginePitchMin + (enginePitchMax - enginePitchMin) * lerpFactor;
+        engineSoundC.volume = engineVolumeMin + (engineVolumeMax - engineVolumeMin) * lerpFactor;
+        windSoundC.pitch = windPitchMin + (windPitchMax - windPitchMin) * lerpFactor;
+        windSoundC.volume= windVolumeMin + (windVolumeMax - windVolumeMin) * lerpFactor;
 
 
         accelerate = false;

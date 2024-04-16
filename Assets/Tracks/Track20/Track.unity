@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5370308, g: 0.5263476, b: 0.48646563, a: 1}
+  m_IndirectSpecularColor: {r: 0.53703046, g: 0.52634686, b: 0.48646456, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 535237588}
   - component: {fileID: 535237587}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Inicio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
